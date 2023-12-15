@@ -29,12 +29,18 @@ const mercadopago = require('mercadopago');
 const { update } = require('./models/Wok');
 
 mercadopago.configure({
-  access_token: 'TEST-695027965126634-121802-510b23c7e4759300bfa01dc4bd7d8e09-309278269',
-});
+  access_token: 'TEST-331835539983448-121501-a9c6fff3cdf4144a53af95da573e1cd5-68387183'
+})
 
 // 3. RUTEO
 
 // A. WOKS
+
+app.get("/", async (req, res) => {
+  res.json({
+    msg: "Todo Ok"
+  })
+})
 
 app.get('/obtener-pwoks', async (req, res) => {
   try {
@@ -67,10 +73,10 @@ app.get('/obtener-pwok/:id', async (req, res) => {
 });
 
 app.post('/crear-pwok', async (req, res) => {
-  const { nombre, precio, imagen, descripcion } = req.body;
+  const { nombre, precio, imagen, descripcion, desclarga } = req.body;
 
   try {
-    const nuevoWok = await Wok.create({ nombre, precio, imagen, descripcion });
+    const nuevoWok = await Wok.create({ nombre, precio, imagen, descripcion, desclarga });
 
     res.json(nuevoWok);
   } catch (error) {
